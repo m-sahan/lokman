@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Lokman - Sağlık Asistanın</title>
+    <link rel="stylesheet" href="ana-panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="img/elokman.png" alt="E-Lokman Logo" class="logo">
+            </div>
+            
+            <div class="user-info">
+                <img src="img/user.png" alt="Kullanıcı Profili" class="user-avatar">
+                <div class="user-details">
+                    <h3>Hoş Geldiniz</h3>
+                    <p>Mehmet Yılmaz</p>
+                </div>
+            </div>
+            
+            <div class="side-nav">
+                <button class="nav-btn active" data-section="homePage">
+                    <div class="btn-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span class="btn-title">Ana Sayfa</span>
+                    </div>
+                </button>
+                
+                <button class="nav-btn" data-section="healthHistory">
+                    <div class="btn-icon">
+                        <i class="fas fa-notes-medical"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span class="btn-title">Sağlık Geçmişim</span>
+                    </div>
+                </button>
+                
+                <button class="nav-btn" data-section="medications">
+                    <div class="btn-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span class="btn-title">İlaçlarım</span>
+                    </div>
+                </button>
+                
+                <button class="nav-btn" data-section="appointments">
+                    <div class="btn-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span class="btn-title">Randevularım</span>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="settings-btn">
+                    <i class="fas fa-cog"></i>
+                    <span>Ayarlar</span>
+                </button>
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Çıkış Yap</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Ana İçerik -->
+        <div class="main-content" id="mainContent">
+            <div class="content-header">
+                <div class="header-title">
+                    <h1>E-Lokman - Sağlık Asistanınız</h1>
+                    <p>Kişisel sağlık yönetimi için akıllı destek</p>
+                </div>
+            </div>
+            
+            <!-- Ana Sayfa İçeriği -->
+            <div class="content-section" id="homePage">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card summary-card">
+                        <div class="card-header">
+                            <h2>Sağlık Özetim</h2>
+                            <span class="card-date" id="currentDate"></span>
+                        </div>
+                        <div class="card-content">
+                            <div class="summary-item">
+                                <div class="summary-icon patients">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <div class="summary-details">
+                                    <h3>3</h3>
+                                    <p>Aktif İlaçlarım</p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon appointments">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="summary-details">
+                                    <h3>2</h3>
+                                    <p>Yaklaşan Randevular</p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon reports">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <div class="summary-details">
+                                    <h3>5</h3>
+                                    <p>Sağlık Raporlarım</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yeni İlaç Hatırlatıcı Kartı -->
+                    <div class="dashboard-card medication-reminder-card">
+                        <div class="card-header">
+                            <h2>İlaç Hatırlatıcı</h2>
+                            <span class="card-date">Bugün</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="reminder-list" id="medicationReminders">
+                             
+                            </div>
+                            <div class="reminder-empty-state" id="emptyReminderState">
+                                <i class="fas fa-bell-slash"></i>
+                                <p>Bugün için ilaç hatırlatıcısı bulunmuyor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card ai-assistant-card">
+                        <div class="card-header">
+                            <h2>Lokman AI Asistan</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="ai-chat-container">
+                                <div class="chat-messages" id="chatMessages">
+                                    <div class="message ai">
+                                        <div class="message-info">
+                                            <img src="img/elokman.png" alt="AI" class="message-avatar">
+                                            <span class="message-sender">Lokman</span>
+                                        </div>
+                                        <div class="message-bubble">
+                                            <p>Merhaba,ben Lokman! Size nasıl yardımcı olabilirim?</p>
+                                        </div>
+                                        <span class="message-time">Şimdi</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="chat-input">
+                                    <div class="input-wrapper">
+                                        <input type="text" id="userInput" placeholder="Sağlığınızla ilgili her şeyi sorabilirsiniz...">
+                                        <button class="input-action-btn" id="micButton">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
+                                    <button class="send-btn" id="sendButton">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card upcoming-card">
+                        <div class="card-header">
+                            <h2>Yaklaşan Randevularım</h2>
+                            <button class="card-action-btn">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="appointment-list">
+                                <div class="appointment-item">
+                                    <div class="appointment-time">
+                                        <span class="time">10:30</span>
+                                        <span class="date">28 Mayıs</span>
+                                    </div>
+                                    <div class="appointment-details">
+                                        <h3>Dahiliye Kontrolü</h3>
+                                        <p>Dr. Mehmet Yılmaz - Şehir Hastanesi</p>
+                                    </div>
+                                    <div class="appointment-status confirmed">
+                                        <span>Onaylandı</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="appointment-item">
+                                    <div class="appointment-time">
+                                        <span class="time">14:15</span>
+                                        <span class="date">3 Haziran</span>
+                                    </div>
+                                    <div class="appointment-details">
+                                        <h3>Kan Tahlili</h3>
+                                        <p>Merkez Laboratuvarı - Şehir Hastanesi</p>
+                                    </div>
+                                    <div class="appointment-status confirmed">
+                                        <span>Onaylandı</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="view-all-btn" onclick="showAllAppointments()">
+                                <span>Tümünü Görüntüle</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card recent-patients-card">
+                        <div class="card-header">
+                            <h2>Sağlık Raporlarım</h2>
+                            <div class="card-actions">
+                            <div class="card-filter">
+                                <select id="patientFilter">
+                                    <option value="all">Tümü</option>
+                                    <option value="today">Son 1 Ay</option>
+                                    <option value="week">Son 6 Ay</option>
+                                </select>
+                            </div>
+                                <button class="add-report-btn" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-plus"></i>
+                                    Rapor Ekle
+                                            </button>
+                                <input type="file" id="fileInput" style="display: none" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFileSelect(event)">
+            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="drop-zone" id="dropZone">
+                                <div class="drop-zone-text">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Dosyaları buraya sürükleyip bırakın veya</p>
+                                    <button class="browse-btn" onclick="document.getElementById('fileInput').click()">Dosya Seçin</button>
+                                    <p class="file-info">Desteklenen formatlar: PDF, JPG, JPEG, PNG</p>
+                                </div>
+                            </div>
+                            <table class="patients-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rapor Türü</th>
+                                        <th>Tarih</th>
+                                        <th>Durum</th>
+                                        <th>İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="patient-info">
+                                                <i class="fas fa-file-medical document-icon"></i>
+                                                <div>
+                                                    <h4>Kan Tahlili</h4>
+                                                    <span>Dr. Ayşe Kaya</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>15 Şubat 2025</td>
+                                        <td><span class="status-badge stable">Normal</span></td>
+                                        <td>
+                                            <button class="table-action-btn">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="patient-info">
+                                                <i class="fas fa-file-medical document-icon"></i>
+                                                <div>
+                                                    <h4>Kardiyoloji Raporu</h4>
+                                                    <span>Dr. Mehmet Demir</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>2 Ocak 2025</td>
+                                        <td><span class="status-badge warning">Takip Gerekli</span></td>
+                                        <td>
+                                            <button class="table-action-btn">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="patient-info">
+                                                <i class="fas fa-file-medical document-icon"></i>
+                                                <div>
+                                                    <h4>Genel Sağlık Kontrolü</h4>
+                                                    <span>Dr. Zeynep Yıldız</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>10 Nisan 2025</td>
+                                        <td><span class="status-badge improving">İyileşiyor</span></td>
+                                        <td>
+                                            <button class="table-action-btn">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sağlık Geçmişi İçeriği -->
+            <div class="content-section" id="healthHistory" style="display: none;">
+                <div class="history-grid">
+                    <div class="history-card">
+                        <div class="card-header">
+                            <h2>Hastane Ziyaretlerim</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="visit-list">
+                                <div class="visit-item">
+                                    <div class="visit-date">15 Şubat 2025</div>
+                                    <div class="visit-details">
+                                        <h3>Ankara Şehir Hastanesi</h3>
+                                        <p>Kardiyoloji - Dr. Mehmet Demir</p>
+                                        <span class="visit-type">Rutin Kontrol</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="visit-item">
+                                    <div class="visit-date">3 Nisan 2025</div>
+                                    <div class="visit-details">
+                                        <h3>Gazi Üniversitesi Hastanesi</h3>
+                                        <p>Dahiliye - Dr. Ayşe Yılmaz</p>
+                                        <span class="visit-type">Genel Muayene</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="visit-item">
+                                    <div class="visit-date">12 Mart 2025</div>
+                                    <div class="visit-details">
+                                        <h3>Özel Medical Park</h3>
+                                        <p>Ortopedi - Dr. Ali Kaya</p>
+                                        <span class="visit-type">Fizik Tedavi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- İlaçlarım İçeriği -->
+            <div class="content-section" id="medications" style="display: none;">
+                <div class="medications-header">
+                    <button class="add-med-btn" onclick="openAddMedModal()">
+                        <i class="fas fa-plus"></i>
+                        Yeni İlaç Ekle
+                    </button>
+                </div>
+                <div class="medications-grid" id="medicationsList">
+                   
+                </div>
+            </div>
+            
+            <!-- Randevularım İçeriği -->
+            <div class="content-section" id="appointments" style="display: none;">
+                <div class="appointments-container">
+                    <div class="appointments-header">
+                        <button class="mhrs-btn" onclick="window.location.href='https://mhrs.gov.tr'">
+                            <i class="fas fa-plus"></i>
+                            MHRS'den Randevu Al
+                        </button>
+                    </div>
+                    
+                    <div class="appointments-grid">
+                        <div class="appointments-list">
+                            <h2>Randevularım</h2>
+                            <div class="appointment-items" id="appointmentsList">
+                                <!-- Mevcut randevular -->
+                            </div>
+                        </div>
+                        
+                        <div class="add-appointment">
+                            <h2>Manuel Randevu Ekle</h2>
+                            <form id="addAppointmentForm" onsubmit="return addAppointment(event)">
+                                <div class="form-group">
+                                    <label>Hastane</label>
+                                    <input type="text" id="hospital" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bölüm</label>
+                                    <input type="text" id="department" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doktor</label>
+                                    <input type="text" id="doctor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tarih</label>
+                                    <input type="date" id="appDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Saat</label>
+                                    <input type="time" id="appTime" required>
+                                </div>
+                                <button type="submit" class="submit-btn">Randevu Ekle</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- İlaç Ekleme Modal -->
+    <div class="modal" id="addMedModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Yeni İlaç Ekle</h2>
+                <button class="close-modal" onclick="closeAddMedModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addMedForm" onsubmit="return addMedication(event)">
+                    <div class="form-group">
+                        <label>İlaç Adı</label>
+                        <input type="text" id="medName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Doz</label>
+                        <input type="text" id="medDose" placeholder="Örn: 500mg" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kullanım Zamanları</label>
+                        <div class="schedule-checkboxes">
+                            <div class="schedule-item">
+                                <label>
+                                    <input type="checkbox" name="schedule" value="sabah">
+                                    Sabah
+                                    <input type="time" name="sabahTime" class="schedule-time">
+                                </label>
+                            </div>
+                            <div class="schedule-item">
+                                <label>
+                                    <input type="checkbox" name="schedule" value="ogle">
+                                    Öğle
+                                    <input type="time" name="ogleTime" class="schedule-time">
+                                </label>
+                            </div>
+                            <div class="schedule-item">
+                                <label>
+                                    <input type="checkbox" name="schedule" value="aksam">
+                                    Akşam
+                                    <input type="time" name="aksamTime" class="schedule-time">
+                                </label>
+                            </div>
+                            <div class="schedule-item">
+                                <label>
+                                    <input type="checkbox" name="schedule" value="gece">
+                                    Gece
+                                    <input type="time" name="geceTime" class="schedule-time">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">İlaç Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ayarlar Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ayarlar</h2>
+                <button class="close-modal" onclick="closeSettingsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="settingsForm" onsubmit="return saveSettings(event)">
+                    <div class="form-group">
+                        <label>Ad Soyad</label>
+                        <input type="text" id="userName" value="Şahan Üner" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-posta</label>
+                        <input type="email" id="userEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" id="userPhone" pattern="[0-9]{10}" placeholder="5XX XXX XX XX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Bildirim Tercihleri</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="notifications" value="email" checked>
+                                E-posta Bildirimleri
+                            </label>
+                            <label>
+                                <input type="checkbox" name="notifications" value="sms" checked>
+                                SMS Bildirimleri
+                            </label>
+                            <label>
+                                <input type="checkbox" name="notifications" value="push" checked>
+                                Uygulama Bildirimleri
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rapor Görüntüleme Modal -->
+    <div class="modal" id="reportViewModal">
+        <div class="modal-content report-view-content">
+            <div class="modal-header">
+                <h2>Rapor Görüntüle</h2>
+                <button class="close-modal" onclick="closeReportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-viewer">
+                    <iframe id="reportFrame" src="" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    /* Yeni CSS stilleri */
+    .card-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .add-report-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .add-report-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .drop-zone {
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        transition: border-color 0.3s, background-color 0.3s;
+        display: none;
+    }
+
+    .drop-zone.drag-over {
+        border-color: #007bff;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .drop-zone-text {
+        color: #666;
+    }
+
+    .drop-zone-text i {
+        font-size: 2rem;
+        color: #007bff;
+        margin-bottom: 1rem;
+    }
+
+    .browse-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 0.5rem 0;
+    }
+
+    .file-info {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.5rem;
+    }
+
+    .upload-progress {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #007bff;
+    }
+
+    .upload-progress i {
+        font-size: 1.2rem;
+    }
+
+    /* Ayarlar Modal Stilleri */
+    .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .checkbox-group label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        width: auto;
+        margin: 0;
+    }
+
+    .modal-content {
+        max-width: 500px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Sağlık Raporları Tablosu Stilleri */
+    .patients-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    .patients-table th,
+    .patients-table td {
+        padding: 1.2rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .patients-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .patients-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .patient-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .document-icon {
+        font-size: 1.5rem;
+        color: #007bff;
+        width: 40px;
+        text-align: center;
+    }
+
+    .patient-info div {
+        flex: 1;
+    }
+
+    .patient-info h4 {
+        margin: 0;
+        font-size: 1rem;
+        color: #212529;
+    }
+
+    .patient-info span {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-block;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .status-badge.stable {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .status-badge.warning {
+        background-color: #fff3e0;
+        color: #ef6c00;
+    }
+
+    .status-badge.improving {
+        background-color: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .table-action-btn {
+        padding: 0.5rem;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .table-action-btn:hover {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+    /* Tablo Responsive Ayarları */
+    @media (max-width: 768px) {
+        .patients-table th,
+        .patients-table td {
+            padding: 0.8rem;
+        }
+        
+        .patient-info h4 {
+            font-size: 0.9rem;
+        }
+        
+        .patient-info span {
+            font-size: 0.8rem;
+        }
+        
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+    }
+
+    /* İlaç saat seçimi için yeni stiller */
+    .schedule-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+    }
+
+    .schedule-item label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .schedule-time {
+        margin-left: auto;
+        padding: 0.3rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    .schedule-time:disabled {
+        background: #f0f0f0;
+        cursor: not-allowed;
+    }
+
+    .schedule-badge {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        background: rgba(45, 135, 176, 0.1);
+        color: var(--primary-color);
+        font-size: 0.85rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    /* İlaç Hatırlatıcı Stilleri */
+    .medication-reminder-card {
+        background: var(--card-bg-color);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+    }
+
+    .reminder-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .reminder-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .reminder-item:hover {
+        background: #f0f5f9;
+        transform: translateX(5px);
+    }
+
+    .reminder-item.past {
+        opacity: 0.7;
+        background: #f5f5f5;
+    }
+
+    .reminder-time {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 80px;
+        color: var(--primary-color);
+    }
+
+    .reminder-time i {
+        font-size: 1.2rem;
+    }
+
+    .reminder-details {
+        flex: 1;
+    }
+
+    .reminder-details h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text-color);
+    }
+
+    .reminder-details p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+
+    .reminder-status {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+    }
+
+    .reminder-status i.fa-check-circle {
+        color: var(--success-color);
+    }
+
+    .reminder-empty-state {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        color: var(--text-light);
+    }
+
+    .reminder-empty-state i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .reminder-empty-state p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Bildirim Stilleri */
+    .notification-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .notification {
+        background: white;
+        border-radius: 8px;
+        padding: 15px 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        min-width: 300px;
+        max-width: 400px;
+        animation: slideIn 0.3s ease-out;
+    }
+
+    .notification.removing {
+        animation: slideOut 0.3s ease-out forwards;
+    }
+
+    .notification-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .notification-content {
+        flex: 1;
+    }
+
+    .notification-title {
+        font-weight: 600;
+        margin: 0 0 5px 0;
+        color: var(--text-color);
+    }
+
+    .notification-message {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+
+    .notification-close {
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 1.2rem;
+        transition: color 0.3s;
+    }
+
+    .notification-close:hover {
+        color: var(--text-color);
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    /* Rapor Görüntüleme Modal Stilleri */
+    .report-view-content {
+        max-width: 90%;
+        height: 90vh;
+        margin: 2vh auto;
+    }
+
+    .report-viewer {
+        width: 100%;
+        height: calc(100% - 60px);
+        background: #f8f9fa;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    #reportFrame {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Logo Stilleri */
+    .logo-container {
+        padding: 1.5rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 1rem;
+        margin-bottom: 0%;
+        padding-bottom: 0%;
+        transition: all 0.3s ease;
+    }
+
+    .logo {
+        width: 150px;
+        height: auto;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+    </style>
+
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <script>
+    // Sayfa geçişleri için fonksiyonlar
+    function showSection(sectionId) {
+        // Tüm bölümleri gizle
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        // Seçilen bölümü göster
+        document.getElementById(sectionId).style.display = 'block';
+        
+        // Aktif menü öğesini güncelle
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+    }
+
+    // Randevu ekleme fonksiyonu
+    function addAppointment(event) {
+        event.preventDefault();
+        
+        const hospital = document.getElementById('hospital').value;
+        const department = document.getElementById('department').value;
+        const doctor = document.getElementById('doctor').value;
+        const date = document.getElementById('appDate').value;
+        const time = document.getElementById('appTime').value;
+        
+        const appointmentHtml = `
+            <div class="appointment-item">
+                <div class="appointment-time">
+                    <span class="time">${time}</span>
+                    <span class="date">${date}</span>
+                </div>
+                <div class="appointment-details">
+                    <h3>${department}</h3>
+                    <p>${doctor} - ${hospital}</p>
+                </div>
+                <div class="appointment-status confirmed">
+                    <span>Onaylandı</span>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('appointmentsList').insertAdjacentHTML('beforeend', appointmentHtml);
+        event.target.reset();
+        return false;
+    }
+
+    // İlaç ekleme fonksiyonu
+    function addMedication(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('medName').value;
+        const dose = document.getElementById('medDose').value;
+        const schedules = Array.from(document.querySelectorAll('input[name="schedule"]:checked'))
+            .map(cb => {
+                const time = document.querySelector(`input[name="${cb.value}Time"]`).value;
+                return { period: cb.value, time: time };
+            });
+        
+        const medHtml = `
+            <div class="med-card">
+                <div class="med-info">
+                    <i class="fas fa-pills med-icon"></i>
+                    <div class="med-details">
+                        <h3>${name}</h3>
+                        <p>${dose}</p>
+                        <div class="med-schedule">
+                            ${schedules.map(s => `
+                                <span class="schedule-badge">
+                                    ${s.period.charAt(0).toUpperCase() + s.period.slice(1)}: ${s.time}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <button class="delete-med-btn" onclick="deleteMedication(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('medicationsList').insertAdjacentHTML('beforeend', medHtml);
+        closeAddMedModal();
+        event.target.reset();
+        return false;
+    }
+
+    // İlaç silme fonksiyonu
+    function deleteMedication(button) {
+        button.closest('.med-card').remove();
+    }
+
+    // Modal fonksiyonları
+    function openAddMedModal() {
+        document.getElementById('addMedModal').style.display = 'block';
+    }
+
+    function closeAddMedModal() {
+        document.getElementById('addMedModal').style.display = 'none';
+    }
+
+    // Modal dışına tıklandığında kapatma
+    window.onclick = function(event) {
+        const modal = document.getElementById('addMedModal');
+        if (event.target == modal) {
+            closeAddMedModal();
+        }
+    }
+
+    // Sayfa yüklendiğinde
+    document.addEventListener('DOMContentLoaded', function() {
+        // Menü butonlarına tıklama olayları ekle
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
+            });
+        });
+    });
+
+    // AI Chat fonksiyonları
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');67
+    const sendButton = document.getElementById('sendButton');
+    const micButton = document.getElementById('micButton');
+
+    // Mesaj gönderme fonksiyonu //HATA YERİ
+    async function sendMessage() {
+    const message = userInput.value.trim();
+    if (message === '') return;
+
+    // Kullanıcı mesajını ekle
+    addMessage('user', message);
+    userInput.value = '';
+
+    try {
+        // Loading mesajı göster
+        const loadingId = showLoadingMessage();
+
+        // API'ye istek at
+        const response = await fetch('https://lokman.onrender.com/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                contents: [
+                    { role: "user", parts: [{ text: message }] }
+                ],
+            })
+        });
+
+        // Loading mesajını kaldır
+        removeLoadingMessage(loadingId);
+
+        if (!response.ok) {
+            throw new Error('API yanıt vermedi');
+        }
+
+        const data = await response.json();
+
+        // API yanıtını ekrana ekle
+        addMessage('ai', data.reply);
+
+    } catch (error) {
+        console.error('Hata:', error);
+        addMessage('ai', 'Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.');
+    }
+}
+
+
+
+    // Mesaj ekleme fonksiyonu
+    function addMessage(type, content) {
+        const time = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+        
+        const messageHtml = `
+            <div class="message ${type}">
+                <div class="message-info">
+                    ${type === 'ai' ? 
+                        `<img src="../photos/ai-avatar.png" alt="AI" class="message-avatar">
+                         <span class="message-sender">E-Lokman AI</span>` :
+                        `<span class="message-sender">Siz</span>
+                         <img src="../photos/person.jpeg" alt="Kullanıcı" class="message-avatar">`
+                    }
+                </div>
+                <div class="message-bubble">
+                    <p>${content.replace(/\*\*/g, '')}</p>
+                </div>
+                <span class="message-time">${time}</span>
+            </div>
+        `;
+        
+        chatMessages.insertAdjacentHTML('beforeend', messageHtml);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Loading mesajı gösterme
+    function showLoadingMessage() {
+        const loadingId = 'loading-' + Date.now();
+        const loadingHtml = `
+            <div class="message ai" id="${loadingId}">
+                <div class="message-info">
+                    <img src="../photos/ai-avatar.png" alt="AI" class="message-avatar">
+                    <span class="message-sender">E-Lokman AI</span>
+                </div>
+                <div class="message-bubble">
+                    <p class="loading-dots">Yanıt yazıyor<span>.</span><span>.</span><span>.</span></p>
+                </div>
+            </div>
+        `;
+        
+        chatMessages.insertAdjacentHTML('beforeend', loadingHtml);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return loadingId;
+    }
+
+    // Loading mesajını kaldırma
+    function removeLoadingMessage(loadingId) {
+        const loadingElement = document.getElementById(loadingId);
+        if (loadingElement) {
+            loadingElement.remove();
+        }
+    }
+
+    // Event Listeners
+    sendButton.addEventListener('click', sendMessage);
+
+    userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Ses tanıma için mikrofon butonu (opsiyonel)
+    let recognition = null;
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.lang = 'tr-TR';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            userInput.value = transcript;
+        };
+
+        micButton.addEventListener('click', () => {
+            recognition.start();
+            micButton.classList.add('active');
+        });
+
+        recognition.onend = () => {
+            micButton.classList.remove('active');
+        };
+    }
+
+    // Tüm randevuları görüntüleme fonksiyonu
+    function showAllAppointments() {
+        // Randevular sekmesine geç
+        showSection('appointments');
+        
+        // Aktif menü öğesini güncelle
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector('[data-section="appointments"]').classList.add('active');
+    }
+
+    // Dosya yükleme işlemleri
+    function handleFileSelect(event) {
+        const files = event.target.files || event.dataTransfer.files;
+        
+        for (const file of files) {
+            if (validateFile(file)) {
+                uploadFile(file);
+            }
+        }
+    }
+
+    function validateFile(file) {
+        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+        const maxSize = 5 * 1024 * 1024; // 5MB
+
+        if (!allowedTypes.includes(file.type)) {
+            alert('Desteklenmeyen dosya formatı! Lütfen PDF veya resim dosyası yükleyin.');
+            return false;
+        }
+
+        if (file.size > maxSize) {
+            alert('Dosya boyutu çok büyük! Maksimum 5MB yükleyebilirsiniz.');
+            return false;
+        }
+
+        return true;
+    }
+
+    function uploadFile(file) {
+        // Yükleme animasyonunu göster
+        const loadingRow = createLoadingRow(file.name);
+        document.querySelector('.patients-table tbody').insertAdjacentHTML('afterbegin', loadingRow);
+
+        // Gerçek uygulamada burada dosya sunucuya yüklenecek
+        // Şimdilik simüle ediyoruz
+        setTimeout(() => {
+            // Yükleme satırını kaldır
+            document.querySelector('.loading-row').remove();
+            
+            // Yeni rapor satırı ekle
+            const newRow = `
+                <tr>
+                    <td>
+                        <div class="patient-info">
+                            <i class="fas fa-file-medical document-icon"></i>
+                            <div>
+                                <h4>${file.name}</h4>
+                                <span>Yüklenen Dosya</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${new Date().toLocaleDateString('tr-TR')}</td>
+                    <td><span class="status-badge stable">Yeni</span></td>
+                    <td>
+                        <button class="table-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+            
+            document.querySelector('.patients-table tbody').insertAdjacentHTML('afterbegin', newRow);
+        }, 2000);
+    }
+
+    function createLoadingRow(fileName) {
+        return `
+            <tr class="loading-row">
+                <td colspan="4">
+                    <div class="upload-progress">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>${fileName} yükleniyor...</span>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+
+    // Sürükle-bırak işlemleri
+    const dropZone = document.getElementById('dropZone');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drag-over');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+        handleFileSelect(e);
+    });
+
+    // Ayarlar fonksiyonları
+    function openSettingsModal() {
+        document.getElementById('settingsModal').style.display = 'block';
+        // Mevcut ayarları yükle
+        loadCurrentSettings();
+    }
+
+    function closeSettingsModal() {
+        document.getElementById('settingsModal').style.display = 'none';
+    }
+
+    function loadCurrentSettings() {
+        // localStorage'dan kayıtlı ayarları al
+        const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+        
+        // Form alanlarını doldur
+        document.getElementById('userName').value = settings.name || 'Şahan Üner';
+        document.getElementById('userEmail').value = settings.email || '';
+        document.getElementById('userPhone').value = settings.phone || '';
+        
+        // Bildirim tercihlerini ayarla
+        const notifications = settings.notifications || ['email', 'sms', 'push'];
+        document.querySelectorAll('input[name="notifications"]').forEach(checkbox => {
+            checkbox.checked = notifications.includes(checkbox.value);
+        });
+    }
+
+    function saveSettings(event) {
+        event.preventDefault();
+        
+        // Form verilerini al
+        const settings = {
+            name: document.getElementById('userName').value,
+            email: document.getElementById('userEmail').value,
+            phone: document.getElementById('userPhone').value,
+            notifications: Array.from(document.querySelectorAll('input[name="notifications"]:checked'))
+                .map(cb => cb.value)
+        };
+        
+        // Ayarları localStorage'a kaydet
+        localStorage.setItem('userSettings', JSON.stringify(settings));
+        
+        // Kullanıcı adını güncelle
+        document.querySelector('.user-details p').textContent = settings.name;
+        
+        // Modal'ı kapat
+        closeSettingsModal();
+        
+        // Başarılı mesajı göster
+        alert('Ayarlarınız başarıyla kaydedildi!');
+        
+        return false;
+    }
+
+    // Çıkış yap fonksiyonu
+    function logout() {
+        if (confirm('Çıkış yapmak istediğinizden emin misiniz?')) {
+            // LocalStorage'ı temizle
+            localStorage.clear();
+            
+            // Ana sayfaya yönlendir
+            window.location.href = '../index.html';
+        }
+    }
+
+    // Event Listeners
+    document.querySelector('.settings-btn').addEventListener('click', openSettingsModal);
+    document.querySelector('.logout-btn').addEventListener('click', logout);
+
+    // Modal dışına tıklandığında kapatma
+    window.onclick = function(event) {
+        const settingsModal = document.getElementById('settingsModal');
+        const medModal = document.getElementById('addMedModal');
+        const reportModal = document.getElementById('reportViewModal');
+        
+        if (event.target == settingsModal) {
+            closeSettingsModal();
+        }
+        if (event.target == medModal) {
+            closeAddMedModal();
+        }
+        if (event.target == reportModal) {
+            closeReportModal();
+        }
+    }
+
+    // Saat seçimi için event listener
+    document.querySelectorAll('input[name="schedule"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const timeInput = document.querySelector(`input[name="${this.value}Time"]`);
+            timeInput.disabled = !this.checked;
+            if (!this.checked) {
+                timeInput.value = '';
+            }
+        });
+    });
+
+    // İlaç hatırlatıcı fonksiyonları
+    function updateMedicationReminders() {
+        const reminderList = document.getElementById('medicationReminders');
+        const emptyState = document.getElementById('emptyReminderState');
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
+        
+        // Tüm ilaç kartlarından bilgileri topla
+        const medications = Array.from(document.querySelectorAll('.med-card')).map(card => {
+            const name = card.querySelector('h3').textContent;
+            const dose = card.querySelector('p').textContent;
+            const schedules = Array.from(card.querySelectorAll('.schedule-badge')).map(badge => {
+                const [period, time] = badge.textContent.split(': ');
+                const [hours, minutes] = time.split(':').map(Number);
+                return { period, time: hours * 60 + minutes };
+            });
+            return { name, dose, schedules };
+        });
+
+        // Bugünün hatırlatıcılarını filtrele
+        const todaysReminders = medications.flatMap(med => 
+            med.schedules.map(schedule => ({
+                ...med,
+                time: schedule.time
+            }))
+        ).sort((a, b) => a.time - b.time);
+
+        // İlaç saati kontrolü ve bildirim gönderme
+        todaysReminders.forEach(reminder => {
+            const timeString = `${Math.floor(reminder.time / 60).toString().padStart(2, '0')}:${(reminder.time % 60).toString().padStart(2, '0')}`;
+            
+            // İlaç saati geldiğinde ve geçmiş 5 dakika içindeyse bildirim göster
+            if (Math.abs(reminder.time - currentTime) <= 5 && reminder.time >= currentTime) {
+                showNotification(
+                    'İlaç Hatırlatıcı',
+                    `${reminder.name} (${reminder.dose}) ilacınızın saati geldi!`
+                );
+            }
+        });
+
+        if (todaysReminders.length === 0) {
+            reminderList.style.display = 'none';
+            emptyState.style.display = 'flex';
+            return;
+        }
+
+        reminderList.style.display = 'block';
+        emptyState.style.display = 'none';
+
+        // Hatırlatıcıları göster
+        reminderList.innerHTML = todaysReminders.map(reminder => {
+            const timeString = `${Math.floor(reminder.time / 60).toString().padStart(2, '0')}:${(reminder.time % 60).toString().padStart(2, '0')}`;
+            const isPast = reminder.time < currentTime;
+            
+            return `
+                <div class="reminder-item ${isPast ? 'past' : ''}">
+                    <div class="reminder-time">
+                        <i class="fas fa-clock"></i>
+                        <span>${timeString}</span>
+                    </div>
+                    <div class="reminder-details">
+                        <h3>${reminder.name}</h3>
+                        <p>${reminder.dose}</p>
+                    </div>
+                    <div class="reminder-status">
+                        ${isPast ? 
+                            '<i class="fas fa-check-circle"></i>' : 
+                            '<i class="fas fa-bell"></i>'
+                        }
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // Sayfa yüklendiğinde ve her dakika hatırlatıcıları güncelle
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCurrentDate();
+        updateMedicationReminders();
+        setInterval(updateMedicationReminders, 60000); // Her dakika güncelle
+    });
+
+    // İlaç eklendiğinde hatırlatıcıları güncelle
+    const originalAddMedication = addMedication;
+    addMedication = function(event) {
+        const result = originalAddMedication(event);
+        updateMedicationReminders();
+        return result;
+    };
+
+    // İlaç silindiğinde hatırlatıcıları güncelle
+    const originalDeleteMedication = deleteMedication;
+    deleteMedication = function(button) {
+        originalDeleteMedication(button);
+        updateMedicationReminders();
+    };
+
+    // Bildirim sistemi
+    function showNotification(title, message) {
+        const container = document.getElementById('notificationContainer');
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        
+        const id = 'notification-' + Date.now();
+        notification.id = id;
+        
+        notification.innerHTML = `
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="notification-content">
+                <h4 class="notification-title">${title}</h4>
+                <p class="notification-message">${message}</p>
+            </div>
+            <button class="notification-close" onclick="closeNotification('${id}')">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        container.appendChild(notification);
+        
+        // 10 saniye sonra otomatik kapat
+        setTimeout(() => {
+            closeNotification(id);
+        }, 10000);
+    }
+
+    function closeNotification(id) {
+        const notification = document.getElementById(id);
+        if (notification) {
+            notification.classList.add('removing');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }
+    }
+
+    // Tarih güncelleme fonksiyonu
+    function updateCurrentDate() {
+        const dateElement = document.getElementById('currentDate');
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('tr-TR', options);
+        dateElement.textContent = currentDate;
+    }
+
+    // Rapor görüntüleme fonksiyonları
+    function viewReport(fileUrl) {
+        const modal = document.getElementById('reportViewModal');
+        const frame = document.getElementById('reportFrame');
+        
+        // Rapor URL'sini frame'e yükle
+        frame.src = fileUrl;
+        
+        // Modal'ı göster
+        modal.style.display = 'block';
+    }
+
+    function closeReportModal() {
+        const modal = document.getElementById('reportViewModal');
+        const frame = document.getElementById('reportFrame');
+        
+        // Frame'i temizle
+        frame.src = '';
+        
+        // Modal'ı gizle
+        modal.style.display = 'none';
+    }
+
+    // Tablo butonlarına tıklama olayı ekle
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... existing code ...
+        
+        // Rapor görüntüleme butonlarına tıklama olayı ekle
+        document.querySelectorAll('.table-action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const reportName = row.querySelector('h4').textContent;
+                const reportDate = row.querySelector('td:nth-child(2)').textContent;
+                
+                // Örnek rapor URL'si (gerçek uygulamada bu URL sunucudan gelecek)
+                const reportUrl = `reports/${reportName.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+                
+                viewReport(reportUrl);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

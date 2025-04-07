@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randevularım - E-Lokman</title>
+    <link rel="stylesheet" href="ana-panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar aynı kalacak -->
+        <!-- Ana İçerik -->
+        <div class="main-content" id="mainContent">
+            <div class="content-header">
+                <button id="toggleSidebar" class="toggle-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h1>Randevularım</h1>
+                    <p>Randevu takibi ve planlama</p>
+                </div>
+                <button class="mhrs-btn" onclick="window.location.href='https://mhrs.gov.tr'">
+                    <i class="fas fa-plus"></i>
+                    MHRS'den Randevu Al
+                </button>
+            </div>
+            
+            <div class="appointments-grid">
+                <div class="upcoming-appointments">
+                    <h2>Yaklaşan Randevular</h2>
+                    <div class="appointment-list">
+                        <!-- Mevcut randevular buraya gelecek -->
+                    </div>
+                </div>
+                
+                <div class="add-appointment">
+                    <h2>Manuel Randevu Ekle</h2>
+                    <form id="addAppointmentForm">
+                        <div class="form-group">
+                            <label>Hastane</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Bölüm</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Doktor</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tarih</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Saat</label>
+                            <input type="time" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Randevu Ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Lokman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                 <img src="img/elokman.png" alt="E-Lokman Logo" class="logo-img">
+                <div class="logo-text">
+                    <span>E-Lokman</span>
+                    <span>Sağlık Asistanı</span>
+                </div>
+            </a>
+
+               <div class="nav-buttons">
+                <a href="https://neyimvar.gov.tr" target="_blank" class="nav-btn neyim-var">
+                    <img src="img/neyimvar.jpeg" alt="Neyim Var">
+                    <span>NeyimVar?</span>
+                </a>
+                <a href="https://mhrs.gov.tr" target="_blank" class="nav-btn randevu">
+                    <img src="img/mhrs-logo.png" alt="Randevu Al">
+                    <span>Randevu Al</span>
+                </a>
+                <a href="https://enabiz.gov.tr" target="_blank" class="nav-btn e-nabiz">
+                    <img src="img/enbaız.jpeg" alt="e-Nabız">
+                    <span>e-Nabız</span>
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <img src="img/lokmantanıtım.png" alt="AI Asistan">
+    </section>
+
+    <main>
+        <div class="giris-container">
+            <h2>E-Lokman'a Hoş Geldiniz</h2>
+            <div class="giris-secenekleri">
+                <div class="edevlet-giris">
+                    <button onclick="window.open('https://giris.turkiye.gov.tr/Giris/', '_blank')"> <img src="img/edevlett.png" alt="e-Devlet Logo">
+                        <p>e-Devlet ile Giriş</p>
+                    </button>
+                </div>
+
+                <div class="form-ayrac">
+                    <span>veya</span>
+                </div>
+
+                <div class="login-container">
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="password" placeholder="Şifre" required>
+                        </div>
+                        <div class="sifremi-unuttum-container">
+                            <button type="button" class="sifremi-unuttum-btn" id="sifremiUnuttumBtn">Şifremi Unuttum</button>
+                        </div>
+                        <button type="submit" class="login-btn">Giriş Yap</button>
+                    </form>
+                </div>
+
+                <div class="kayit-link">
+                    <button class="kayit-btn" id="kayitBtn">Hemen Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="kayitModal" class="modal">
+            <div class="modal-icerik">
+                <span class="kapat">&times;</span>
+                <h2>Kayıt Ol</h2>
+                <div class="form-scroll">
+                    <form id="kayitFormu">
+                        <div class="form-grup"><label for="tc">T.C. Kimlik No:</label><input type="text" id="tc" maxlength="11" pattern="\d{11}" required></div>
+                        <div class="form-grup"><label for="ad">Ad:</label><input type="text" id="ad" required></div>
+                        <div class="form-grup"><label for="soyad">Soyad:</label><input type="text" id="soyad" required></div>
+                        <div class="form-grup"><label for="dogumTarihi">Doğum Tarihi:</label><input type="date" id="dogumTarihi" required></div>
+                        <div class="form-grup"><label for="telefon">Telefon:</label><input type="tel" id="telefon" pattern="\d{10}" placeholder="5XX XXX XX XX" required></div>
+                        <div class="form-grup"><label for="kayitEposta">E-posta:</label><input type="email" id="kayitEposta" required></div>
+                        <div class="form-grup"><label for="kayitSifre">Şifre:</label><input type="password" id="kayitSifre" required></div>
+                        <div class="form-grup"><label for="sifreTekrar">Şifre Tekrar:</label><input type="password" id="sifreTekrar" required></div>
+                        <div class="form-grup"><label><input type="checkbox" id="kvkk" required> KVKK şartlarını okudum ve kabul ediyorum</label></div>
+                        <button type="submit" class="kayit-gonder-btn"><span>Kayıt Ol</span><div class="dalga"></div></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="sifremiUnuttumModal" class="modal">
+            <div class="modal-icerik">
+                <span class="kapat">&times;</span>
+                <h2>Şifremi Unuttum</h2>
+                <form id="sifremiUnuttumFormu">
+                    <div class="form-grup"><label for="sifremiUnuttumEposta">E-posta:</label><input type="email" id="sifremiUnuttumEposta" required></div>
+                    <button type="submit" class="sifre-sifirla-btn"><span>Şifre Sıfırlama Linki Gönder</span><div class="dalga"></div></button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-icerik">
+            <div class="footer-logo">
+                 <img src="img/LOKman(1).png" alt="E-Lokman Logo">
+            </div>
+            <div class="footer-bolum">
+                <h3>E-Lokman</h3>
+                <p>Senin Sağlık Asistanın</p>
+            </div>
+        </div>
+        <div class="footer-alt">
+            <p>&copy; 2025 E-Lokman. Tüm hakları saklıdır.</p> </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Bu script script.js içine taşınabilir veya orada güncellenebilir.
+        // Şimdilik burada bırakıyoruz ama script.js'de benzer bir event listener olmalı.
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Formun normal gönderimini engelle
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // GEÇİCİ KONTROL - GERÇEK UYGULAMADA GÜVENLİ BACKEND KULLANILMALI
+            if (username === 'admin' && password === 'admin') {
+                 // Güncellenmiş yönlendirme yolu
+                window.location.href = 'ana-panel.html';
+            } else {
+                alert('Kullanıcı adı veya şifre hatalı!');
+            }
+            // return false; // preventDefault zaten yapıyor
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlaçlarım - E-Lokman</title>
+    <link rel="stylesheet" href="ana-panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar aynı kalacak -->
+        <!-- Ana İçerik -->
+        <div class="main-content" id="mainContent">
+            <div class="content-header">
+                <button id="toggleSidebar" class="toggle-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h1>İlaçlarım</h1>
+                    <p>İlaç takibi ve hatırlatıcılar</p>
+                </div>
+                <button class="add-med-btn" onclick="openAddMedModal()">
+                    <i class="fas fa-plus"></i>
+                    Yeni İlaç Ekle
+                </button>
+            </div>
+            
+            <div class="medications-grid">
+                <div class="med-card">
+                    <div class="med-info">
+                        <i class="fas fa-pills med-icon"></i>
+                        <div class="med-details">
+                            <h3>Parol</h3>
+                            <p>500mg Tablet</p>
+                            <div class="med-schedule">
+                                <span class="schedule-badge">Sabah</span>
+                                <span class="schedule-badge">Akşam</span>
+                            </div>
+                        </div>
+                        <button class="delete-med-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- İlaç Ekleme Modal -->
+    <div class="modal" id="addMedModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Yeni İlaç Ekle</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addMedForm">
+                    <div class="form-group">
+                        <label>İlaç Adı</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Doz</label>
+                        <input type="text" placeholder="Örn: 500mg" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kullanım Zamanları</label>
+                        <div class="schedule-checkboxes">
+                            <label><input type="checkbox" value="sabah"> Sabah</label>
+                            <label><input type="checkbox" value="ogle"> Öğle</label>
+                            <label><input type="checkbox" value="aksam"> Akşam</label>
+                            <label><input type="checkbox" value="gece"> Gece</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">İlaç Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
